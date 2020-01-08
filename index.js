@@ -4,7 +4,7 @@ const app = express();
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}));
 
-const port = 80;
+const port = process.env.PORT || 3000;
 const BASE_URL = '/';
 
 
@@ -134,7 +134,7 @@ app.get(BASE_URL + ':id', function (req, res) {
  */
 app.get(BASE_URL + 'filter/:name', function (req, res) {
     const name = req.params.name;
-    const product = products.filter(product => product.name.toLocaleLowerCase().indexOf(name.toLocaleLowerCase()) >= 0 );
+    const product = products.filter(product => product.name.toLocaleLowerCase().indexOf(name.toLocaleLowerCase()) >= 0);
     res.send(product ? product : null);
 });
 
@@ -200,7 +200,7 @@ app.delete(BASE_URL + ':id', function (req, res) {
 /**
  * find all items
  */
-app.get(BASE_URL+ 'basket/all', (req, res) => res.send(basket));
+app.get(BASE_URL + 'basket/all', (req, res) => res.send(basket));
 
 /**
  * edit item , <b> add </b> if not existed
@@ -209,7 +209,7 @@ app.get(BASE_URL+ 'basket/all', (req, res) => res.send(basket));
  *     qte : 5
  * }
  */
-app.put(BASE_URL+ 'basket', function (req, res) {
+app.put(BASE_URL + 'basket', function (req, res) {
     let body = req.body;
     let index = products.findIndex(value => value.id === body.product.id);
     if (index === -1) {
@@ -218,10 +218,10 @@ app.put(BASE_URL+ 'basket', function (req, res) {
         res.status(400).send({message: `qte should be positive`})
     } else {
         let prodInBasketIndex = basket.findIndex(value => value.product.id === body.product.id);
-        if(prodInBasketIndex === -1) {
+        if (prodInBasketIndex === -1) {
             basket.push(body);
-        }else {
-            basket.splice(prodInBasketIndex,1,body);
+        } else {
+            basket.splice(prodInBasketIndex, 1, body);
         }
         res.send(body);
     }
