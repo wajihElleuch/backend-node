@@ -57,7 +57,22 @@ class Product {
     }
 
 }
-
+class User{
+    constructor(id,firstName, lastName, selected) {
+        this.id = id;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.selected = selected;
+        console.log(this);
+    }
+}
+let users=[
+    new User(1,'wajih', 'elleuch', false),
+    new User(2,'dali', 'jallouli', false),
+    new User(3,'amin', 'ammami', false),
+    new User(4,'helmi', 'reguiag', false),
+    new User(5,'issam', 'ayadi', false),
+]
 
 let products = [
     // *** IT ***
@@ -113,9 +128,13 @@ let products = [
 let basket = [];
 
 /**
- * find all
+ * find all product
  */
 app.get(BASE_URL, (req, res) => res.send(products.sort((a, b) => a.name.localeCompare(b.name))));
+/**
+ * find all users
+ */
+app.get(BASE_URL+ 'users', (req, res) => res.send(users.sort((a, b) => a.firstName.localeCompare(b.firstName))));
 
 /**
  * find by id
@@ -185,7 +204,23 @@ app.put(BASE_URL, function (req, res) {
         res.send(prod);
     }
 });
-
+/**
+ * edit user
+ */
+app.put(BASE_URL+'users/edit', function (req, res) {
+    let body = req.body;
+    let index = users.findIndex(value => {
+        return value.id === body.id;
+    });
+    if (index === -1) {
+        res.status(404).send({message: `user ${body.firstName} not found`})
+    } else {
+        let user = users[index];
+        Object.assign(user, body);
+        users.splice(index, 1, user);
+        res.send(user);
+    }
+});
 /**
  *  delete product
  */
