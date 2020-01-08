@@ -4,7 +4,7 @@ const app = express();
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}));
 
-const port = 8080;
+const port = 80;
 const BASE_URL = '/';
 
 
