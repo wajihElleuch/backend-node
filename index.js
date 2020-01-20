@@ -57,7 +57,40 @@ class Product {
     }
 
 }
+class vesselDetail {
+    constructor(id, Arrival_at_Terminal_Road, Notice_of_readiness_Tendered,
+                Drop_Anchor, Anchor_Aweight, Pilot_on_Board_In, Commenced_Mooring, First_line, Completed_mooring,
+                All_Fast, Pilot_Off, Agent_and_authorities_on_board, Free_practise_granted, Notice_of_readiness_accepted,
+                Tank_inspection_Start, Tank_inspection_End, Hose_connection_Start, Hose_connection_End) {
+        this.id = id;
+        this.Arrival_at_Terminal_Road = Arrival_at_Terminal_Road;
+        this.Notice_of_readiness_Tendered = Notice_of_readiness_Tendered;
+        this.Drop_Anchor = Drop_Anchor;
+        this.Anchor_Aweight = Anchor_Aweight;
+        this.Pilot_on_Board_In = Pilot_on_Board_In;
+        this.Commenced_Mooring = Commenced_Mooring;
+        this.First_line = First_line;
+        this.Completed_mooring = Completed_mooring;
+        this.All_Fast = All_Fast;
+        this.Pilot_Off = Pilot_Off;
+        this.Agent_and_authorities_on_board = Agent_and_authorities_on_board;
+        this.Free_practise_granted = Free_practise_granted;
+        this.Notice_of_readiness_accepted = Notice_of_readiness_accepted;
+        this.Tank_inspection_Start = Tank_inspection_Start;
+        this.Tank_inspection_End = Tank_inspection_End;
+        this.Hose_connection_Start = Hose_connection_Start;
+        this.Hose_connection_End = Hose_connection_End;
+        // console.log(this);
+    }
+}
 
+class oneVessel {
+    constructor(checked, date, name) {
+        this.checked = checked;
+        this.date = date;
+        this.name = name;
+    }
+}
 class User {
     constructor(id, firstName, lastName, selected) {
         this.id = id;
@@ -83,7 +116,7 @@ class vessel {
         this.HTA = HTA;
         this.icon = icon;
         this.details = details;
-        console.log(this);
+       // console.log(this);
     }
 }
 
@@ -164,44 +197,11 @@ let vessels = [
             new oneVessel(false, '', 'Tank inspection End'),
             new oneVessel(false, '', 'Hose connection Start'),
             new oneVessel(false, '', 'Hose_connection_End'))
-        ),
+        )
 
 ]
 
-class vesselDetail {
-    constructor(id, Arrival_at_Terminal_Road, Notice_of_readiness_Tendered,
-                Drop_Anchor, Anchor_Aweight, Pilot_on_Board_In, Commenced_Mooring, First_line, Completed_mooring,
-                All_Fast, Pilot_Off, Agent_and_authorities_on_board, Free_practise_granted, Notice_of_readiness_accepted,
-                Tank_inspection_Start, Tank_inspection_End, Hose_connection_Start, Hose_connection_End) {
-        this.id = id;
-        this.Arrival_at_Terminal_Road = Arrival_at_Terminal_Road;
-        this.Notice_of_readiness_Tendered = Notice_of_readiness_Tendered;
-        this.Drop_Anchor = Drop_Anchor;
-        this.Anchor_Aweight = Anchor_Aweight;
-        this.Pilot_on_Board_In = Pilot_on_Board_In;
-        this.Commenced_Mooring = Commenced_Mooring;
-        this.First_line = First_line;
-        this.Completed_mooring = Completed_mooring;
-        this.All_Fast = All_Fast;
-        this.Pilot_Off = Pilot_Off;
-        this.Agent_and_authorities_on_board = Agent_and_authorities_on_board;
-        this.Free_practise_granted = Free_practise_granted;
-        this.Notice_of_readiness_accepted = Notice_of_readiness_accepted;
-        this.Tank_inspection_Start = Tank_inspection_Start;
-        this.Tank_inspection_End = Tank_inspection_End;
-        this.Hose_connection_Start = Hose_connection_Start;
-        this.Hose_connection_End = Hose_connection_End;
-        console.log(this);
-    }
-}
 
-class oneVessel {
-    constructor(checked, date, name) {
-        this.checked = checked;
-        this.date = date;
-        this.name = name;
-    }
-}
 
 let vesselDetails = [
     new vesselDetail(1,
@@ -275,7 +275,7 @@ let vesselDetails = [
         new oneVessel(false, '', 'Tank inspection Start'),
         new oneVessel(false, '', 'Tank inspection End'),
         new oneVessel(false, '', 'Hose connection Start'),
-        new oneVessel(false, '', 'Hose_connection_End')),
+        new oneVessel(false, '', 'Hose_connection_End'))
 
 ]
 
@@ -345,10 +345,10 @@ app.get(BASE_URL + 'vessels', (req, res) => res.send(vessels));
  */
 app.get(BASE_URL + 'vessels' + '/:id', function (req, res) {
     const id = req.params.id;
-    console.log(id);
-    console.log(vesselDetails);
+    //console.log(id);
+   // console.log(vesselDetails);
     const vesselDetail = vesselDetails.find(vessel => vessel.id == id);
-    console.log(vesselDetail);
+    //console.log(vesselDetail);
     if (!vesselDetail) {
         res.status(404).send({message: `vessel with id : ${id} not found`});
     }
