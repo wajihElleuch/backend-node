@@ -357,18 +357,19 @@ app.get(BASE_URL + 'vessels' + '/:id', function (req, res) {
 /**
  * edit vessel
  */
-app.put(BASE_URL + 'vessels/edit', function (req, res) {
-    let body = req.body;
+app.put(BASE_URL + 'edit/vessel', function (req, res) {
+    let body = req.body.vessel;
+    console.log(body.id);
     let index = vessels.findIndex(value => {
-        return value.id === body.id;
+        return value.id == body.id;
     });
     if (index === -1) {
-        res.status(404).send({message: `vessel ${body.id} not found`})
+        res.status(300).send({message: `vessel ${body.id} not found`})
     } else {
         let vessel = vessels[index];
         Object.assign(vessel, body);
         vessels.splice(index, 1, vessel);
-        res.send(vessel);
+        res.send(vessels);
     }
 });
 /**
