@@ -347,12 +347,12 @@ app.get(BASE_URL + 'vessels' + '/:id', function (req, res) {
     const id = req.params.id;
     //console.log(id);
    // console.log(vesselDetails);
-    const vesselDetail = vesselDetails.find(vessel => vessel.id == id);
+    const vesselById = vessels.find(vessel => vessel.id == id);
     //console.log(vesselDetail);
-    if (!vesselDetail) {
+    if (!vesselById) {
         res.status(404).send({message: `vessel with id : ${id} not found`});
     }
-    res.send(vesselDetail);
+    res.send(vesselById);
 });
 /**
  * find all users
