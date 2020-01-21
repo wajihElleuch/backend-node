@@ -355,6 +355,23 @@ app.get(BASE_URL + 'vessels' + '/:id', function (req, res) {
     res.send(vesselById);
 });
 /**
+ * edit vessel
+ */
+app.put(BASE_URL + 'vessels/edit', function (req, res) {
+    let body = req.body;
+    let index = vessels.findIndex(value => {
+        return value.id === body.id;
+    });
+    if (index === -1) {
+        res.status(404).send({message: `vessel ${body.id} not found`})
+    } else {
+        let vessel = vessels[index];
+        Object.assign(vessel, body);
+        vessels.splice(index, 1, vessel);
+        res.send(vessel);
+    }
+});
+/**
  * find all users
  */
 app.get(BASE_URL + 'users', (req, res) => res.send(users.sort((a, b) => a.firstName.localeCompare(b.firstName))));
