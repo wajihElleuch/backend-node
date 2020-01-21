@@ -358,7 +358,7 @@ app.get(BASE_URL + 'vessels' + '/:id', function (req, res) {
  * edit vessel
  */
 app.put(BASE_URL + 'edit/vessel', function (req, res) {
-    let body = req.body.vessel;
+    let body = req.body;
     console.log(body.id);
     let index = vessels.findIndex(value => {
         return value.id == body.id;
